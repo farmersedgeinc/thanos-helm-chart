@@ -5,7 +5,7 @@
 
 image:
   repository: improbable/thanos
-  tag: v0.3.2
+  tag: v0.4.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -15,9 +15,11 @@ s3:
   enabled: false
   bucket: ""
   endpoint: ""
-  insecure: false
-  signatureV2: true
-  encryptSse: false
+  accessKey: ""
+  secretKey: ""
+  # insecure: false
+  # signatureV2: true
+  # encryptSse: false
 
 
 # Thanos store configuration
@@ -28,6 +30,9 @@ store:
   logLevel: debug
 
   clusterDisabled: true
+
+  indexCacheSize: 512MB
+  chunkPoolSize: 4GB
 
   # cert, key and ca are base64 encoded strings
   tlsServer:
@@ -70,7 +75,6 @@ store:
     type: ClusterIP
     port: 10902
     nodePortEnabled: false
-    nodePortEnabled: false
     nodePort: 30902
     externalTrafficPolicy: ""
     annotations: {}
@@ -101,6 +105,17 @@ query:
   stores:
     - store.example.local:10901
   queryReplicaLabel: replica
+  autoDownsampling: true
+  partialResponse: true
+
+  ingress:
+    enabled: false
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    host: ""
+    tls:
+      - hosts: [ ]
+        secretName: ""
 
   # cert, key and ca are base64 encoded strings
   tlsClient:
@@ -151,7 +166,6 @@ query:
     type: ClusterIP
     port: 10902
     nodePortEnabled: false
-    nodePortEnabled: false
     nodePort: 30902
     externalTrafficPolicy: ""
     annotations: {}
@@ -179,7 +193,7 @@ compact:
   enabled: false
   replicaCount: 1
 
-  syncDelay: 30m
+  consistencyDelay: 30m
   retentionResolutionRaw: 0d
   retentionResolution5m: 0d
   retentionResolution1h: 0d
