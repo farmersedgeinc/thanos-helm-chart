@@ -71,7 +71,7 @@ store:
     annotations: {}
 
   httpService:
-    enabled: true
+    enabled: false
     type: ClusterIP
     port: 10902
     nodePortEnabled: false
@@ -153,7 +153,7 @@ query:
     annotations: {}
 
   grpcService:
-    enabled: true
+    enabled: false
     type: ClusterIP
     port: 10901
     nodePortEnabled: false
@@ -213,7 +213,7 @@ compact:
       clusterPort: 10900
 
   httpService:
-    enabled: true
+    enabled: false
     type: ClusterIP
     port: 10902
     nodePortEnabled: false
