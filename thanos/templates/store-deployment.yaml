@@ -41,6 +41,8 @@ spec:
             {{- if .Values.s3.enabled }}
             - "--objstore.config-file=/thanos-s3/s3.yaml"
             {{- end }}
+            - "--index-cache-size={{ .Values.store.indexCacheSize }}"
+            - "--chunk-pool-size={{ .Values.store.chunkPoolSize }}"
             {{- if .Values.store.tlsServer.enabled }}
             - "--grpc-server-tls-cert=/thanos-tls-server/server.crt"
             - "--grpc-server-tls-key=/thanos-tls-server/server.key"

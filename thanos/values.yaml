@@ -27,6 +27,9 @@ store:
 
   logLevel: debug
 
+  indexCacheSize: 250MB
+  chunkPoolSize: 2GB
+
   clusterDisabled: true
 
   # cert, key and ca are base64 encoded strings
@@ -101,6 +104,8 @@ query:
   stores:
     - store.example.local:10901
   queryReplicaLabel: replica
+  autoDownsampling: false
+  partialResponse: false
 
   # cert, key and ca are base64 encoded strings
   tlsClient:
