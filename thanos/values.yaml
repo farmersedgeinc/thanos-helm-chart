@@ -15,8 +15,10 @@ s3:
   enabled: false
   bucket: ""
   endpoint: ""
+  accessKey: ""
+  secretKey: ""
   insecure: false
-  signatureV2: true
+  signatureV2: false
   encryptSse: false
 
 

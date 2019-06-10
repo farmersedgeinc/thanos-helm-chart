@@ -74,7 +74,7 @@ spec:
           emptyDir: {}
       {{- if .Values.s3.enabled }}
         - name: {{ include "thanos.fullname" . }}-thanos-s3-config
-          configMap:
-            name: {{ include "thanos.fullname" . }}-thanos-s3-config
+          secret:
+            secretName: {{ include "thanos.fullname" . }}-thanos-s3-config
       {{- end }}
 {{- end -}}
