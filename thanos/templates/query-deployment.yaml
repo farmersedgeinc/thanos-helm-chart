@@ -39,6 +39,12 @@ spec:
             - "--store={{ . }}"
             {{- end }}
             - "--query.replica-label={{ .Values.query.queryReplicaLabel }}"
+            {{- if .Values.query.autoDownsampling }}
+            - "--query.auto-downsampling"
+            {{- end }}
+            {{- if .Values.query.partialResponse }}
+            - "--query.partial-response"
+            {{- end }}
             {{- if .Values.query.tlsClient.enabled }}
             - "--grpc-client-tls-secure"
             - "--grpc-client-tls-cert=/thanos-tls-client/client.crt"
