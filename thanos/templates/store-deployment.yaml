@@ -38,8 +38,8 @@ spec:
             {{- if .Values.store.clusterDisabled }}
             - "--cluster.disable"
             {{- end }}
-            {{- if .Values.s3.enabled }}
-            - "--objstore.config-file=/thanos-s3/s3.yaml"
+            {{- if .Values.objStore.enabled }}
+            - "--objstore.config-file=/thanos/objStore.yaml"
             {{- end }}
             {{- if .Values.store.tlsServer.enabled }}
             - "--grpc-server-tls-cert=/thanos-tls-server/server.crt"
@@ -56,9 +56,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/thanos/store
-            {{- if .Values.s3.enabled }}
-            - name: {{ include "thanos.fullname" . }}-thanos-s3-config
-              mountPath: /thanos-s3
+            {{- if .Values.objStore.enabled }}
+            - name: {{ include "thanos.fullname" . }}-thanos-objstore-config
+              mountPath: /thanos
             {{- end }}
             {{- if .Values.store.tlsServer.enabled }}
             - name: {{ include "thanos.fullname" . }}-thanos-store-tls-server
@@ -81,10 +81,10 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
-      {{- if .Values.s3.enabled }}
-        - name: {{ include "thanos.fullname" . }}-thanos-s3-config
+      {{- if .Values.objStore.enabled }}
+        - name: {{ include "thanos.fullname" . }}-thanos-objstore-config
           secret:
-            secretName: {{ include "thanos.fullname" . }}-thanos-s3-config
+            secretName: {{ include "thanos.fullname" . }}-thanos-objstore-config
       {{- end }}
       {{- if .Values.store.tlsServer.enabled }}
         - name: {{ include "thanos.fullname" . }}-thanos-store-tls-server

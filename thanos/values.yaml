@@ -11,16 +11,19 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-s3:
+# Object Storage configuration formatted according to documentation https://thanos.io/storage.md/
+objStore:
   enabled: false
-  bucket: ""
-  endpoint: ""
-  accessKey: ""
-  secretKey: ""
-  insecure: false
-  signatureV2: false
-  encryptSse: false
-
+  config:
+    type: S3
+    config:
+      bucket: ""
+      endpoint: ""
+      access_key: ""
+      secret_key: ""
+      insecure: false
+      signature_version2: true
+      encrypt_sse: false
 
 # Thanos store configuration
 store:
