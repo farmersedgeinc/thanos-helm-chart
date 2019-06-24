@@ -5,7 +5,7 @@
 
 image:
   repository: improbable/thanos
-  tag: v0.3.2
+  tag: v0.4.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -179,7 +179,7 @@ compact:
   enabled: false
   replicaCount: 1
 
-  syncDelay: 30m
+  consistencyDelay: 30m
   retentionResolutionRaw: 0d
   retentionResolution5m: 0d
   retentionResolution1h: 0d
